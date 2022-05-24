@@ -1,7 +1,15 @@
 package com.example.integrador
 
-import java.util.*
+data class Parking (val vehicles: MutableSet<Vehicle>, val maxVehicle: Int = 20) {
 
-data class Parking (val vehicles: MutableSet<Vehicle>) {
+    fun addVehicle(vehicle: Vehicle) : Boolean {
+        if (this.vehicles.size < maxVehicle) {
+            vehicles.add(vehicle)
+            println("Welcome to AlkeParking")
+            return true
+        }
+        println("Sorry, check-in failed")
+        return false
+    }
 
 }
