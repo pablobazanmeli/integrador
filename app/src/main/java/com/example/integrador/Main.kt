@@ -18,7 +18,7 @@ fun main() {
     parking.addVehicle(car2)
     parking.addVehicle(car3)
 
-//    println(parking.vehicles.remove(car2))
+    println(parking.vehicles.remove(car2))
 //
 //    println(parking.vehicles.contains(car)) //true
 //    println(parking.vehicles.contains(moto)) //true
