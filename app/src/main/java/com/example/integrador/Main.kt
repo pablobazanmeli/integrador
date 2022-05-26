@@ -1,6 +1,4 @@
-import com.example.integrador.Parking
-import com.example.integrador.Vehicle
-import com.example.integrador.VehicleType
+package com.example.integrador
 import java.util.*
 
 fun main() {
