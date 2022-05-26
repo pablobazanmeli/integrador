@@ -1,38 +1,30 @@
 package com.example.integrador
+
 import java.util.*
 
 fun main() {
 
-    val car = Vehicle("123ABC", VehicleType.CAR, Calendar.getInstance(), "123456" )
-    val moto = Vehicle("111ABC", VehicleType.MOTORCYCLE, Calendar.getInstance(),  )
-    val minibus = Vehicle("222ABC", VehicleType.MINIBUS, Calendar.getInstance(), "123456" )
-    val bus = Vehicle("333ABC", VehicleType.BUS, Calendar.getInstance(),)
-    val bus2 = Vehicle("333ABC", VehicleType.BUS, Calendar.getInstance(),)
-
-    var vehicleList: MutableList<Vehicle> = mutableListOf(
-        car, moto, minibus, bus,
-        Vehicle("444ABC", VehicleType.BUS, Calendar.getInstance()),
-        Vehicle("555ABC", VehicleType.BUS, Calendar.getInstance()),
-        Vehicle("666ABC", VehicleType.BUS, Calendar.getInstance()),
-        Vehicle("777ABC", VehicleType.BUS, Calendar.getInstance()),
-        Vehicle("888ABC", VehicleType.BUS, Calendar.getInstance()),
-        Vehicle("999ABC", VehicleType.BUS, Calendar.getInstance()),
-    )
-
-
-
+    val car = Vehicle("123ABC", VehicleType.CAR, Calendar.getInstance(), "123456")
+    val moto = Vehicle("111ABC", VehicleType.MOTORCYCLE, Calendar.getInstance())
+    val minibus = Vehicle("222ABC", VehicleType.MINIBUS, Calendar.getInstance(), "123456")
+    val bus = Vehicle("333ABC", VehicleType.BUS, Calendar.getInstance())
+    val bus2 = Vehicle("333ABC", VehicleType.BUS, Calendar.getInstance())
+    
     val parking = Parking(mutableSetOf(), 8)
 
-    vehicleList.map{
-        parking.addVehicle(it)
-    }
+    parking.addVehicle(car)
+    println(parking.vehicles.contains(car))
+    val parkingSpace = ParkingSpace(vehicle = car, parkedTime = 15, parking = parking)
 
-    //vehicleList.addAll(listOf(car, moto, minibus, bus))
-    //vehicleList.forEach<Vehicle>( parking::addVehicle )
+//    parking.vehicles.remove()
+    parkingSpace.checkOutVehicle(
+        plate = "123ABC",
+        onSuccess = {
+            println("Value to be paid: $$it")
+        },
+        onError = {
+            println("An error has occurred")
+        }
+    )
 
-    println(parking.vehicles.contains(car)) //true
-    println(parking.vehicles.contains(moto)) //true
-    println(parking.vehicles.contains(minibus)) //true
-    println(parking.vehicles.contains(bus)) //true
-    parking.addVehicle(bus2)
 }
