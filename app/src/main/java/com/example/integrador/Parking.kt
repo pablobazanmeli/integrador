@@ -5,10 +5,10 @@ data class Parking (val vehicles: MutableSet<Vehicle>, val maxVehicle: Int = 20)
     fun addVehicle(vehicle: Vehicle) : Boolean {
         if (this.vehicles.size < maxVehicle) {
             vehicles.add(vehicle)
-            println("Welcome to AlkeParking")
+            println("Welcome to AlkeParking!")
             return true
         }
-        println("Sorry, check-in failed")
+        println("Sorry, the check-in failed")
         return false
     }
 
