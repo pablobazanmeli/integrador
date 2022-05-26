@@ -1,26 +1,40 @@
-package com.example.integrador
+import com.example.integrador.Parking
+import com.example.integrador.Vehicle
+import com.example.integrador.VehicleType
 import java.util.*
 
 fun main() {
 
-    var vehicleList: MutableList<Vehicle> = mutableListOf()
     val car = Vehicle("123ABC", VehicleType.CAR, Calendar.getInstance(), "123456" )
     val moto = Vehicle("111ABC", VehicleType.MOTORCYCLE, Calendar.getInstance(),  )
     val minibus = Vehicle("222ABC", VehicleType.MINIBUS, Calendar.getInstance(), "123456" )
     val bus = Vehicle("333ABC", VehicleType.BUS, Calendar.getInstance(),)
-    val car2 = Vehicle("123AAA", VehicleType.CAR, Calendar.getInstance(), "123456" )
-    val car3 = Vehicle("123BBB", VehicleType.CAR, Calendar.getInstance(), "123456" )
-    val car4 = Vehicle("123CCC", VehicleType.CAR, Calendar.getInstance(), "123456" )
+    val bus2 = Vehicle("333ABC", VehicleType.BUS, Calendar.getInstance(),)
 
-    val parking = Parking(mutableSetOf(), 4)
+    var vehicleList: MutableList<Vehicle> = mutableListOf(
+        car, moto, minibus, bus,
+        Vehicle("444ABC", VehicleType.BUS, Calendar.getInstance()),
+        Vehicle("555ABC", VehicleType.BUS, Calendar.getInstance()),
+        Vehicle("666ABC", VehicleType.BUS, Calendar.getInstance()),
+        Vehicle("777ABC", VehicleType.BUS, Calendar.getInstance()),
+        Vehicle("888ABC", VehicleType.BUS, Calendar.getInstance()),
+        Vehicle("999ABC", VehicleType.BUS, Calendar.getInstance()),
+    )
 
-    vehicleList.addAll(listOf(car, moto, minibus, bus, car2, car3))
-    vehicleList.forEach<Vehicle>( parking::addVehicle )
+
+
+    val parking = Parking(mutableSetOf(), 8)
+
+    vehicleList.map{
+        parking.addVehicle(it)
+    }
+
+    //vehicleList.addAll(listOf(car, moto, minibus, bus))
+    //vehicleList.forEach<Vehicle>( parking::addVehicle )
 
     println(parking.vehicles.contains(car)) //true
     println(parking.vehicles.contains(moto)) //true
     println(parking.vehicles.contains(minibus)) //true
     println(parking.vehicles.contains(bus)) //true
-    println(parking.vehicles.contains(car2)) //false
-
+    parking.addVehicle(bus2)
 }
