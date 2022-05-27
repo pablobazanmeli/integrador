@@ -4,7 +4,6 @@ import java.util.*
 
 const val MINUTES_IN_MILLISECONDS: Int = 60000
 
-
 data class ParkingSpace(
     var vehicle: Vehicle,
     val parkedTime: Long =
@@ -21,9 +20,20 @@ data class ParkingSpace(
             parking.deleteVehicle(plate)
         } else {
             onError()
-        }
+            println("Sorry the vehicle isn't in the parking")
 
+        }
     }
 }
+
+//if(parking.vehicles.any{ it.plate == plate })
+//
+//        {
+//            onSuccess(parkedTime.toInt())
+//        }
+//        else
+//        {
+//            onError()
+//        }
 
 //No tomo el Get()

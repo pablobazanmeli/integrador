@@ -9,7 +9,7 @@ fun main() {
     val minibus = Vehicle("222ABC", VehicleType.MINIBUS, Calendar.getInstance(), "123456")
     val bus = Vehicle("333ABC", VehicleType.BUS, Calendar.getInstance())
     val bus2 = Vehicle("333ABC", VehicleType.BUS, Calendar.getInstance())
-    
+
     val parking = Parking(mutableSetOf(), 8)
 
     parking.addVehicle(car)
@@ -26,5 +26,5 @@ fun main() {
             println("An error has occurred")
         }
     )
-
 }
+
