@@ -4,7 +4,7 @@ import java.util.*
 
 fun main() {
 
-    val car = Vehicle("123ABC", VehicleType.CAR, Calendar.getInstance(), "123456")
+    val car = Vehicle("123ABC", VehicleType.CAR, Calendar.getInstance(), "ABC123")
     val moto = Vehicle("111ABC", VehicleType.MOTORCYCLE, Calendar.getInstance())
     val minibus = Vehicle("222ABC", VehicleType.MINIBUS, Calendar.getInstance(), "123456")
     val bus = Vehicle("333ABC", VehicleType.BUS, Calendar.getInstance())
@@ -16,11 +16,10 @@ fun main() {
     parking.addVehicle(moto)
 
 //    println(parking.vehicles.contains(car))
-    val parkingSpace = ParkingSpace(vehicle = moto, parkedTime = 258, parking = parking)
+    val parkingSpace = ParkingSpace(vehicle = car, parkedTime = 135, parking = parking)
 
 //    parking.vehicles.remove()
     parkingSpace.checkOutVehicle(
-        plate = "111ABC",
         onSuccess = {
             println("Value to be paid: $$it \nThanks you for visiting AlkeParking!")
         },

@@ -15,12 +15,13 @@ data class ParkingSpace(
 
 
     fun checkOutVehicle(
-        plate: String,
+        plate: String = vehicle.plate,
         onSuccess: (amount: Int) -> Unit,
         onError: () -> Unit
     ) {
         if (parking.isInParking(plate)) {
-            val fee = calculateFee(parking.findVehicle(plate)!!.type, parkedTime)
+            val vehicle = parking.findVehicle(plate)!!
+            val fee = calculateFee(vehicle.type, parkedTime, vehicle.discountCard != null)
             onSuccess(fee)
             parking.deleteVehicle(plate)
         } else {
@@ -31,14 +32,32 @@ data class ParkingSpace(
     }
 
 
-    private fun calculateFee(vehicleType: VehicleType, parkedTime: Long): Int {
-        val overtimeFraction = 15.0
+    private fun calculateFee(
+        vehicleType: VehicleType,
+        parkedTime: Long,
+        hasDiscountCard: Boolean
+    ): Int {
+        val overtimeFraction = 15F
         val fractionatedTime: Int = ceil(parkedTime / overtimeFraction).toInt()
         val extraCost = 5
-        return if (fractionatedTime <= 8) {
-            vehicleType.value
-        } else {
-            vehicleType.value + (extraCost * (fractionatedTime - 8))
-        }
+        var fee: Int =
+            if (fractionatedTime <= 8) vehicleType.value
+            else vehicleType.value + (extraCost * (fractionatedTime - 8))
+
+        return if (hasDiscountCard) (fee * 0.85).toInt()
+        else fee
     }
+
+//    private fun calculateFee(
+//        vehicleType: VehicleType,
+//        parkedTime: Long,
+//        hasDiscountCard: Boolean
+//    ): Int {
+//        val overtimeFraction = 15F
+//        val fractionatedTime: Int = ceil(parkedTime / overtimeFraction).toInt()
+//        if (hasDiscountCard) {
+//            fractionatedTime * 15 / 100
+//            return fractionatedTime
+//        } else return fractionatedTime
+//    }
 }
