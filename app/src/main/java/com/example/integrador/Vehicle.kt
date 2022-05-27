@@ -2,10 +2,11 @@ package com.example.integrador
 
 import java.util.*
 
+
 data class Vehicle(
     val plate: String,
     val type: VehicleType,
-    val checkInTime: Calendar = Calendar.getInstance(),//TODO es correcto que el auto tenga el checkIn??
+    val checkInTime: Calendar = Calendar.getInstance(),
     val discountCard: String? = null
 ) {
 

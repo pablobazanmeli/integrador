@@ -22,10 +22,15 @@ data class Parking(val vehicles: MutableSet<Vehicle>, val maxVehicle: Int = 20) 
 
     fun deleteVehicle(plate: String): Boolean {
         if (isInParking(plate)) {
-            this.vehicles.remove(this.vehicles.find { it.plate == plate })
+            val vehicle = findVehicle(plate)
+            this.vehicles.remove(vehicle)
             println("Vehicle with plate $plate was deleted")
             return true
         }
         return false
+    }
+
+    fun findVehicle(plate: String): Vehicle? {
+        return this.vehicles.find { it.plate == plate }
     }
 }

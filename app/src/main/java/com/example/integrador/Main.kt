@@ -13,14 +13,16 @@ fun main() {
     val parking = Parking(mutableSetOf(), 8)
 
     parking.addVehicle(car)
-    println(parking.vehicles.contains(car))
-    val parkingSpace = ParkingSpace(vehicle = car, parkedTime = 15, parking = parking)
+    parking.addVehicle(moto)
+
+//    println(parking.vehicles.contains(car))
+    val parkingSpace = ParkingSpace(vehicle = moto, parkedTime = 258, parking = parking)
 
 //    parking.vehicles.remove()
     parkingSpace.checkOutVehicle(
-        plate = "123ABC",
+        plate = "111ABC",
         onSuccess = {
-            println("Value to be paid: $$it")
+            println("Value to be paid: $$it \nThanks you for visiting AlkeParking!")
         },
         onError = {
             println("An error has occurred")
