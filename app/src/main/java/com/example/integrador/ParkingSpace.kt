@@ -7,11 +7,16 @@ const val MINUTES_IN_MILLISECONDS: Int = 60000
 
 data class ParkingSpace(
     val vehicle: Vehicle,
-//    val checkInTime: Calendar = Calendar.getInstance(), //TODO Cheaquear si es necesario
     val parkedTime: Long =
         (Calendar.getInstance().timeInMillis - vehicle.checkInTime.timeInMillis) / MINUTES_IN_MILLISECONDS,
     val parking: Parking
 ) {
+
+//    fun checkOut(plate: String) {
+//        val utils: Utils = Utils()
+//        checkOutVehicle(plate = plate, onSuccess = utils.onSuccess(), onError = utils.onError())
+//
+//    }
 
 
     fun checkOutVehicle(
@@ -23,7 +28,9 @@ data class ParkingSpace(
             val vehicle = parking.findVehicle(plate)!!
             val fee = calculateFee(vehicle.type, parkedTime, vehicle.discountCard != null)
             onSuccess(fee)
+            parking.addHistory(fee)
             parking.deleteVehicle(plate)
+
         } else {
             onError()
         }
@@ -38,7 +45,7 @@ data class ParkingSpace(
         val overtimeFraction = 15F
         val fractionatedTime: Int = ceil(parkedTime / overtimeFraction).toInt()
         val extraCost = 5
-        var fee: Int =
+        val fee: Int =
             if (fractionatedTime <= 8) vehicleType.value
             else vehicleType.value + (extraCost * (fractionatedTime - 8))
 
@@ -46,16 +53,4 @@ data class ParkingSpace(
         else fee
     }
 
-//    private fun calculateFee(
-//        vehicleType: VehicleType,
-//        parkedTime: Long,
-//        hasDiscountCard: Boolean
-//    ): Int {
-//        val overtimeFraction = 15F
-//        val fractionatedTime: Int = ceil(parkedTime / overtimeFraction).toInt()
-//        if (hasDiscountCard) {
-//            fractionatedTime * 15 / 100
-//            return fractionatedTime
-//        } else return fractionatedTime
-//    }
 }
