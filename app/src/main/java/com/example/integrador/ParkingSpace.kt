@@ -25,15 +25,4 @@ data class ParkingSpace(
         }
     }
 }
-
-//if(parking.vehicles.any{ it.plate == plate })
-//
-//        {
-//            onSuccess(parkedTime.toInt())
-//        }
-//        else
-//        {
-//            onError()
-//        }
-
 //No tomo el Get()

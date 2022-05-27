@@ -17,7 +17,7 @@ data class Parking(val vehicles: MutableSet<Vehicle>, val maxVehicle: Int = 20) 
     }
 
     fun isInParking(plate: String): Boolean {
-        return this.vehicles.any<Vehicle> { it.plate == plate }
+        return this.vehicles.any { it.plate == plate }
     }
 
     fun deleteVehicle(plate: String): Boolean {
