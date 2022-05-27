@@ -21,10 +21,10 @@ fun main() {
 //    parking.vehicles.remove()
     parkingSpace.checkOutVehicle(
         onSuccess = {
-            println("Value to be paid: $$it \nThanks you for visiting AlkeParking!")
+            println("Your fee is $$it. Come back soon.")
         },
         onError = {
-            println("An error has occurred")
+            println("Sorry, the check-out failed")
         }
     )
 }

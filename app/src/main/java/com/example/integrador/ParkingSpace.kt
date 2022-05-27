@@ -26,8 +26,6 @@ data class ParkingSpace(
             parking.deleteVehicle(plate)
         } else {
             onError()
-            println("Sorry the vehicle isn't in the parking")
-
         }
     }
 
