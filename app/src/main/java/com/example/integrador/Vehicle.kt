@@ -9,7 +9,6 @@ data class Vehicle(
     val checkInTime: Calendar = Calendar.getInstance(),
     val discountCard: String? = null
 ) {
-
     override fun equals(other: Any?): Boolean {
         if (other is Vehicle) {
             return this.plate == other.plate

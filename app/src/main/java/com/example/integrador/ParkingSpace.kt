@@ -11,14 +11,6 @@ data class ParkingSpace(
         (Calendar.getInstance().timeInMillis - vehicle.checkInTime.timeInMillis) / MINUTES_IN_MILLISECONDS,
     val parking: Parking
 ) {
-
-//    fun checkOut(plate: String) {
-//        val utils: Utils = Utils()
-//        checkOutVehicle(plate = plate, onSuccess = utils.onSuccess(), onError = utils.onError())
-//
-//    }
-
-
     fun checkOutVehicle(
         plate: String = vehicle.plate,
         onSuccess: (amount: Int) -> Unit,
@@ -52,3 +44,4 @@ data class ParkingSpace(
         else fee
     }
 }
+
