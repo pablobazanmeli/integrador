@@ -36,9 +36,10 @@ data class ParkingSpace(
         val overtimeFraction = 15F
         val fractionatedTime: Int = ceil(parkedTime / overtimeFraction).toInt()
         val extraCost = 5
+        val twoHours = 8
         val fee: Int =
-            if (fractionatedTime <= 8) vehicleType.value
-            else vehicleType.value + (extraCost * (fractionatedTime - 8))
+            if (fractionatedTime <= twoHours) vehicleType.value
+            else vehicleType.value + (extraCost * (fractionatedTime - twoHours))
 
         return if (hasDiscountCard) (fee * 0.85).toInt()
         else fee
