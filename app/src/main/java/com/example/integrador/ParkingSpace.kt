@@ -11,14 +11,6 @@ data class ParkingSpace(
         (Calendar.getInstance().timeInMillis - vehicle.checkInTime.timeInMillis) / MINUTES_IN_MILLISECONDS,
     val parking: Parking
 ) {
-
-//    fun checkOut(plate: String) {
-//        val utils: Utils = Utils()
-//        checkOutVehicle(plate = plate, onSuccess = utils.onSuccess(), onError = utils.onError())
-//
-//    }
-
-
     fun checkOutVehicle(
         //show the fee of the vehicle at checkout
         plate: String = vehicle.plate,
@@ -46,9 +38,10 @@ data class ParkingSpace(
         val overtimeFraction = 15F
         val fractionatedTime: Int = ceil(parkedTime / overtimeFraction).toInt()
         val extraCost = 5
+        val twoHours = 8
         val fee: Int =
-            if (fractionatedTime <= 8) vehicleType.value
-            else vehicleType.value + (extraCost * (fractionatedTime - 8))
+            if (fractionatedTime <= twoHours) vehicleType.value
+            else vehicleType.value + (extraCost * (fractionatedTime - twoHours))
 
         return if (hasDiscountCard) (fee * 0.85).toInt()
         else fee
