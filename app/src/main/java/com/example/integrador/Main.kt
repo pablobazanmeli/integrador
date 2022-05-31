@@ -12,24 +12,24 @@ fun main() {
 
     val vehicleList: MutableList<Vehicle> = mutableListOf(
         car, moto, minibus, bus,
-        Vehicle("444ABC", VehicleType.BUS, Calendar.getInstance(),"123abc"),
+        Vehicle("444ABC", VehicleType.BUS, Calendar.getInstance(), "123abc"),
         Vehicle("555ABC", VehicleType.CAR, Calendar.getInstance()),
         Vehicle("666ABC", VehicleType.MOTORCYCLE, Calendar.getInstance()),
-        Vehicle("777ABC", VehicleType.BUS, Calendar.getInstance(),"123abc"),
+        Vehicle("777ABC", VehicleType.BUS, Calendar.getInstance(), "123abc"),
         Vehicle("888ABC", VehicleType.MINIBUS, Calendar.getInstance()),
-        Vehicle("999ABC", VehicleType.BUS, Calendar.getInstance(),"123abc"),
+        Vehicle("999ABC", VehicleType.BUS, Calendar.getInstance(), "123abc"),
         Vehicle("221ABC", VehicleType.CAR, Calendar.getInstance()),
         Vehicle("223ABC", VehicleType.MOTORCYCLE, Calendar.getInstance()),
-        Vehicle("224ABC", VehicleType.MINIBUS, Calendar.getInstance(),"123abc"),
+        Vehicle("224ABC", VehicleType.MINIBUS, Calendar.getInstance(), "123abc"),
         Vehicle("225ABC", VehicleType.BUS, Calendar.getInstance()),
         Vehicle("226ABC", VehicleType.CAR, Calendar.getInstance()),
         Vehicle("227ABC", VehicleType.MOTORCYCLE, Calendar.getInstance()),
-        Vehicle("228ABC", VehicleType.MINIBUS, Calendar.getInstance(),"123abc"),
+        Vehicle("228ABC", VehicleType.MINIBUS, Calendar.getInstance(), "123abc"),
         Vehicle("229ABC", VehicleType.BUS, Calendar.getInstance()),
         Vehicle("321ABC", VehicleType.CAR, Calendar.getInstance()),
-        Vehicle("322ABC", VehicleType.MINIBUS, Calendar.getInstance(),"123avc"),
-        Vehicle("322ABC", VehicleType.MOTORCYCLE, Calendar.getInstance(),"123avc"),
-        Vehicle("222ABC", VehicleType.BUS, Calendar.getInstance(),"123avc"),
+        Vehicle("322ABC", VehicleType.MINIBUS, Calendar.getInstance(), "123avc"),
+        Vehicle("322ABC", VehicleType.MOTORCYCLE, Calendar.getInstance(), "123avc"),
+        Vehicle("222ABC", VehicleType.BUS, Calendar.getInstance(), "123avc"),
     )
 
     val parking = Parking(mutableSetOf(), maxVehicle = 20)
@@ -38,7 +38,7 @@ fun main() {
         parking.addVehicle(it)
     }
 
-    val parkingSpace = ParkingSpace(vehicle = car, parkedTime = 135, parking = parking)
+    val parkingSpace = ParkingSpace(vehicle = car, parking = parking)
 
     parkingSpace.checkOutVehicle(car.plate, ::onSuccess, ::onError)
     parkingSpace.checkOutVehicle("444ABC", ::onSuccess, ::onError)
@@ -51,8 +51,9 @@ fun main() {
 
 
     parking.getHistory()
-    parking.listVehicles()
+//    parking.listVehicles()
 }
+
 fun onSuccess(fee: Int): Unit = println("Your fee is $fee. Come back soon.")
 fun onError(): Unit = println("Sorry, the check-out failed")
 
