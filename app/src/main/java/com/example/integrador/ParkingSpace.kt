@@ -20,10 +20,11 @@ data class ParkingSpace(
 
 
     fun checkOutVehicle(
+        //show the fee of the vehicle at checkout
         plate: String = vehicle.plate,
         onSuccess: (amount: Int) -> Unit,
-        onError: () -> Unit
-    ) {
+        onError: () -> Unit)
+    {
         if (parking.isInParking(plate)) {
             val vehicle = parking.findVehicle(plate)!!
             val fee = calculateFee(vehicle.type, parkedTime, vehicle.discountCard != null)
@@ -37,10 +38,11 @@ data class ParkingSpace(
     }
 
     private fun calculateFee(
+        //calculate the money to pay and if have a discount card
         vehicleType: VehicleType,
         parkedTime: Long,
-        hasDiscountCard: Boolean
-    ): Int {
+        hasDiscountCard: Boolean): Int
+    {
         val overtimeFraction = 15F
         val fractionatedTime: Int = ceil(parkedTime / overtimeFraction).toInt()
         val extraCost = 5
@@ -52,3 +54,4 @@ data class ParkingSpace(
         else fee
     }
 }
+
