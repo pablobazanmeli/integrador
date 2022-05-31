@@ -36,7 +36,6 @@ data class ParkingSpace(
         }
     }
 
-
     private fun calculateFee(
         vehicleType: VehicleType,
         parkedTime: Long,
@@ -53,5 +52,4 @@ data class ParkingSpace(
         return if (hasDiscountCard) (fee * 0.85).toInt()
         else fee
     }
-
 }

@@ -47,7 +47,4 @@ fun main() {
 
     parking.getHistory()
     parking.listVehicles()
-
-
 }
-
