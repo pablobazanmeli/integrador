@@ -6,7 +6,9 @@ data class Vehicle(
     val plate: String,
     val type: VehicleType,
     val checkInTime: Calendar = Calendar.getInstance(),
-    val discountCard: String? = null
+    val discountCard: String? = null,
+    val parkedTime: Long =
+        (Calendar.getInstance().timeInMillis - checkInTime.timeInMillis) / MINUTES_IN_MILLISECONDS,
 ) {
     override fun equals(other: Any?): Boolean {
         if (other is Vehicle) {

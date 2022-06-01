@@ -5,26 +5,31 @@ import kotlin.math.ceil
 
 const val MINUTES_IN_MILLISECONDS: Int = 60000
 
-data class ParkingSpace(
-    val vehicle: Vehicle,
-    val parkedTime: Long =
-        (Calendar.getInstance().timeInMillis - vehicle.checkInTime.timeInMillis) / MINUTES_IN_MILLISECONDS,
-    val parking: Parking
-) {
+open class ParkingSpace(
+    private val vehicle: MutableSet<Vehicle>,
+
+    ) {
+
+    var countVehicle = 0
+    var countFee = 0
+
     fun checkOutVehicle(
         //show the fee of the vehicle at checkout
-        plate: String = vehicle.plate,
+        plate: String,
         onSuccess: (amount: Int) -> Unit,
         onError: () -> Unit)
     {
-        if (parking.isInParking(plate)) {
-            val vehicle = parking.findVehicle(plate)!!
-            val fee = calculateFee(vehicle.type, parkedTime, vehicle.discountCard != null)
-            onSuccess(fee)
-            parking.addHistory(fee)
-            parking.deleteVehicle(plate)
+        val vehicleInParking = vehicle.map { it }.filter { it.plate == plate }
 
-        } else {
+        if(vehicleInParking.isNotEmpty()){
+            val foundVehicle = vehicleInParking[0]
+            val fee = calculateFee(foundVehicle.type, foundVehicle.parkedTime, foundVehicle.discountCard != null)
+            onSuccess(fee)
+            countVehicle++
+            countFee += fee
+            vehicle.remove(foundVehicle)
+        }
+        else {
             onError()
         }
     }

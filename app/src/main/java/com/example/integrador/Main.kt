@@ -8,7 +8,7 @@ fun main() {
     val moto = Vehicle("111ABC", VehicleType.MOTORCYCLE, Calendar.getInstance())
     val minibus = Vehicle("222ABC", VehicleType.MINIBUS, Calendar.getInstance(), "123456")
     val bus = Vehicle("333ABC", VehicleType.BUS, Calendar.getInstance())
-
+    val parking = Parking(mutableSetOf(),)
 
     val vehicleList: MutableList<Vehicle> = mutableListOf(
         car, moto, minibus, bus,
@@ -32,26 +32,27 @@ fun main() {
         Vehicle("222ABC", VehicleType.BUS, Calendar.getInstance(), "123avc"),
     )
 
-    val parking = Parking(mutableSetOf(), maxVehicle = 20)
-
+    //add a vehicle automatically
     vehicleList.map {
         parking.addVehicle(it)
     }
+    //checkout vehicle and calculate fees if it's a success or a mistake
+    parking.checkOutVehicle(car.plate, ::onSuccess, ::onError)
+    parking.checkOutVehicle("444ABC", ::onSuccess, ::onError)
+    parking.checkOutVehicle("777ABC", ::onSuccess, ::onError)
+    parking.checkOutVehicle("777ABC", ::onSuccess, ::onError)
+    parking.checkOutVehicle("555ABC", ::onSuccess, ::onError)
+    parking.checkOutVehicle("666ABC", ::onSuccess, ::onError)
+    parking.checkOutVehicle("888ABC", ::onSuccess, ::onError)
+    parking.checkOutVehicle("881ABC", ::onSuccess, ::onError)
 
-    val parkingSpace = ParkingSpace(vehicle = car, parking = parking)
-
-    parkingSpace.checkOutVehicle(car.plate, ::onSuccess, ::onError)
-    parkingSpace.checkOutVehicle("444ABC", ::onSuccess, ::onError)
-    parkingSpace.checkOutVehicle("777ABC", ::onSuccess, ::onError)
-    parkingSpace.checkOutVehicle("777ABC", ::onSuccess, ::onError)
-    parkingSpace.checkOutVehicle("555ABC", ::onSuccess, ::onError)
-    parkingSpace.checkOutVehicle("666ABC", ::onSuccess, ::onError)
-    parkingSpace.checkOutVehicle("888ABC", ::onSuccess, ::onError)
-    parkingSpace.checkOutVehicle("881ABC", ::onSuccess, ::onError)
-
+    //Give information on the parking's vehicles and fee totals
     parking.getHistory()
-//    parking.listVehicles()
+
+    //List of all vehicles in the parking
+    parking.listVehicles()
 }
+
 
 fun onSuccess(fee: Int): Unit = println("Your fee is $fee. Come back soon.")
 fun onError(): Unit = println("Sorry, the check-out failed")
