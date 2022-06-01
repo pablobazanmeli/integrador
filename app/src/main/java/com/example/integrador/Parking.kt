@@ -25,6 +25,11 @@ data class Parking(
         return this.vehicles.any { it.plate == plate }
     }
 
+    fun findVehicle(plate: String): Vehicle? {
+        //search the vehicle by plate
+        return this.vehicles.find { it.plate == plate }
+    }
+
     fun deleteVehicle(plate: String): Boolean {
         //if the vehicle is in the parking,take it out
         if (isInParking(plate)) {
@@ -33,11 +38,6 @@ data class Parking(
             return true
         }
         return false
-    }
-
-    fun findVehicle(plate: String): Vehicle? {
-        //search the vehicle by plate
-        return this.vehicles.find { it.plate == plate }
     }
 
     fun addHistory(fee: Int) {

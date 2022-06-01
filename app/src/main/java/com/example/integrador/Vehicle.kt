@@ -2,7 +2,6 @@ package com.example.integrador
 
 import java.util.*
 
-
 data class Vehicle(
     val plate: String,
     val type: VehicleType,
@@ -17,5 +16,4 @@ data class Vehicle(
     }
 
     override fun hashCode(): Int = this.plate.hashCode()
-
 }

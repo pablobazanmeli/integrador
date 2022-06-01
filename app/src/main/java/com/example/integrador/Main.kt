@@ -38,7 +38,7 @@ fun main() {
         parking.addVehicle(it)
     }
 
-    val parkingSpace = ParkingSpace(vehicle = car, parkedTime = 135, parking = parking)
+    val parkingSpace = ParkingSpace(vehicle = car, parking = parking)
 
     parkingSpace.checkOutVehicle(car.plate, ::onSuccess, ::onError)
     parkingSpace.checkOutVehicle("444ABC", ::onSuccess, ::onError)
@@ -48,7 +48,6 @@ fun main() {
     parkingSpace.checkOutVehicle("666ABC", ::onSuccess, ::onError)
     parkingSpace.checkOutVehicle("888ABC", ::onSuccess, ::onError)
     parkingSpace.checkOutVehicle("881ABC", ::onSuccess, ::onError)
-
 
     parking.getHistory()
     parking.listVehicles()
